@@ -189,7 +189,7 @@ img{ max-width:100%; display:block; }
   font-weight:800;
   margin:0 0 20px;
 }
-.footer-contact a{
+.footer-contact a:not(.social-icon){
   display:block;
   color:#fff;
   text-decoration:underline;
