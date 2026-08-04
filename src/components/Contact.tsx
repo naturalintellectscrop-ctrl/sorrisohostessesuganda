@@ -3,9 +3,30 @@
 import { useState, type FormEvent } from "react";
 import { Mail, Phone, MessageCircle, Loader2, CheckCircle2 } from "lucide-react";
 import Reveal from "@/components/Reveal";
-import { contact, siteInfo } from "@/data/content";
+import { contact, contactChannelLabels, siteInfo } from "@/data/content";
 
 type Status = "idle" | "submitting" | "success" | "error" | "unconfigured";
+
+const contactRows = [
+  {
+    key: "whatsapp" as const,
+    Icon: MessageCircle,
+    value: siteInfo.phone || siteInfo.whatsapp,
+    href: siteInfo.whatsapp ? `https://wa.me/${siteInfo.whatsapp}` : "",
+  },
+  {
+    key: "phone" as const,
+    Icon: Phone,
+    value: siteInfo.phone,
+    href: siteInfo.phone ? `tel:${siteInfo.phone.replace(/[^\d+]/g, "")}` : "",
+  },
+  {
+    key: "email" as const,
+    Icon: Mail,
+    value: siteInfo.email,
+    href: siteInfo.email ? `mailto:${siteInfo.email}` : "",
+  },
+];
 
 // Set NEXT_PUBLIC_CONTACT_FORM_EMAIL once a destination inbox is ready.
 // Until then the form intentionally refuses to submit anywhere (see the
@@ -63,50 +84,42 @@ export default function Contact() {
             {contact.body}
           </p>
 
-          {/* Each entry only renders once a real value exists in siteInfo,
-              so the page never shows a blank or placeholder contact. */}
+          {/* Rows always show so the layout is final. A row becomes a live
+              link once its siteInfo value is filled in; until then it
+              names the channel rather than inventing a number or address. */}
           <ul className="space-y-5">
-            {siteInfo.whatsapp && (
-              <li>
-                <a
-                  href={`https://wa.me/${siteInfo.whatsapp}`}
-                  target="_blank"
-                  rel="noopener"
-                  className="flex items-center gap-4 text-white/80 hover:text-gold-light transition-colors"
-                >
+            {contactRows.map(({ key, Icon, value, href }) => {
+              const inner = (
+                <>
                   <span className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center shrink-0">
-                    <MessageCircle size={18} strokeWidth={1.5} />
+                    <Icon size={18} strokeWidth={1.5} />
                   </span>
-                  <span className="font-body">{siteInfo.phone || siteInfo.whatsapp}</span>
-                </a>
-              </li>
-            )}
-            {siteInfo.phone && (
-              <li>
-                <a
-                  href={`tel:${siteInfo.phone.replace(/[^\d+]/g, "")}`}
-                  className="flex items-center gap-4 text-white/80 hover:text-gold-light transition-colors"
-                >
-                  <span className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center shrink-0">
-                    <Phone size={18} strokeWidth={1.5} />
+                  <span className="font-body">
+                    {value || contactChannelLabels[key]}
                   </span>
-                  <span className="font-body">{siteInfo.phone}</span>
-                </a>
-              </li>
-            )}
-            {siteInfo.email && (
-              <li>
-                <a
-                  href={`mailto:${siteInfo.email}`}
-                  className="flex items-center gap-4 text-white/80 hover:text-gold-light transition-colors"
-                >
-                  <span className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center shrink-0">
-                    <Mail size={18} strokeWidth={1.5} />
-                  </span>
-                  <span className="font-body">{siteInfo.email}</span>
-                </a>
-              </li>
-            )}
+                </>
+              );
+
+              return (
+                <li key={key}>
+                  {href ? (
+                    <a
+                      href={href}
+                      {...(key === "whatsapp"
+                        ? { target: "_blank", rel: "noopener" }
+                        : {})}
+                      className="flex items-center gap-4 text-white/80 hover:text-gold-light transition-colors"
+                    >
+                      {inner}
+                    </a>
+                  ) : (
+                    <div className="flex items-center gap-4 text-white/40">
+                      {inner}
+                    </div>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </Reveal>
 

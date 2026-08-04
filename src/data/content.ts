@@ -14,9 +14,10 @@ export const navLinks: NavLink[] = [
   { label: "Contact", href: "#contact" },
 ];
 
-// Contact details and social profiles are intentionally blank until the
-// client supplies real ones. Components skip any entry left empty, so
-// nothing false or dead-ended is shown. Fill these in as they arrive.
+// Contact details and social profiles are still blank pending the real
+// values. The rows and icons stay visible either way; each one only
+// becomes a working link once its value is filled in here, so the
+// layout is final but nothing points somewhere false in the meantime.
 export const siteInfo = {
   name: "Sorrisó Hostesses Uganda",
   shortName: "Sorrisó",
@@ -27,6 +28,14 @@ export const siteInfo = {
   instagram: "",
   linkedin: "",
   facebook: "",
+};
+
+// Shown in place of a value while the corresponding siteInfo field is
+// empty, so a channel is named without inventing a number or address.
+export const contactChannelLabels = {
+  whatsapp: "WhatsApp",
+  phone: "Phone",
+  email: "Email",
 };
 
 export const hero = {

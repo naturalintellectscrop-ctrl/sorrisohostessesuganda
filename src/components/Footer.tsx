@@ -25,13 +25,14 @@ function FacebookIcon() {
   );
 }
 
-// Only profiles with a real URL in siteInfo are shown, so the footer
-// never links out to a dead or placeholder page.
+// All three icons always show. Each becomes a real link once its URL is
+// filled into siteInfo; until then it renders as a plain, non-clickable
+// mark rather than linking out to a dead page.
 const socials = [
   { Icon: InstagramIcon, href: siteInfo.instagram, label: "Instagram" },
   { Icon: LinkedinIcon, href: siteInfo.linkedin, label: "LinkedIn" },
   { Icon: FacebookIcon, href: siteInfo.facebook, label: "Facebook" },
-].filter((social) => social.href);
+];
 
 export default function Footer() {
   return (
@@ -61,19 +62,32 @@ export default function Footer() {
             ))}
           </ul>
 
-          <div className="flex gap-3 sm:justify-end empty:hidden">
-            {socials.map(({ Icon, href, label }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener"
-                aria-label={label}
-                className="w-11 h-11 rounded-full flex items-center justify-center text-white/80 bg-white/[0.06] backdrop-blur-md border border-white/15 shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] hover:text-gold-light hover:bg-gold/20 hover:border-gold/40 transition-colors duration-300"
-              >
-                <Icon />
-              </a>
-            ))}
+          <div className="flex gap-3 sm:justify-end">
+            {socials.map(({ Icon, href, label }) => {
+              const shell =
+                "w-11 h-11 rounded-full flex items-center justify-center bg-white/[0.06] backdrop-blur-md border border-white/15 shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]";
+
+              return href ? (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener"
+                  aria-label={label}
+                  className={`${shell} text-white/80 hover:text-gold-light hover:bg-gold/20 hover:border-gold/40 transition-colors duration-300`}
+                >
+                  <Icon />
+                </a>
+              ) : (
+                <span
+                  key={label}
+                  aria-label={label}
+                  className={`${shell} text-white/40`}
+                >
+                  <Icon />
+                </span>
+              );
+            })}
           </div>
         </div>
 

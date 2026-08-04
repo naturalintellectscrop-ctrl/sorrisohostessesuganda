@@ -26,13 +26,13 @@ All copy, services, gallery images, and contact details live in [`src/data/conte
 
 ### Still to be supplied by the client
 
-These are deliberately left blank or as stand-ins rather than filled with invented values. Components skip any field left empty, so nothing false or dead-ended is rendered.
+These are deliberately left blank or as stand-ins rather than filled with invented values. The contact rows and social icons stay visible so the layout is final; each one turns into a working link the moment its value is filled into `siteInfo`, with no component changes needed.
 
 | Item | Where | Current state |
 | --- | --- | --- |
-| Phone / WhatsApp | `siteInfo.phone`, `siteInfo.whatsapp` | Blank, contact rows hidden |
-| Email address | `siteInfo.email` | Blank, contact row hidden |
-| Social profiles | `siteInfo.instagram`, `.linkedin`, `.facebook` | Blank, footer icons hidden |
+| Phone / WhatsApp | `siteInfo.phone`, `siteInfo.whatsapp` | Blank, rows show the channel name and are not clickable |
+| Email address | `siteInfo.email` | Blank, row shows the channel name and is not clickable |
+| Social profiles | `siteInfo.instagram`, `.linkedin`, `.facebook` | Blank, footer icons show but do not link |
 | Event photography | `public/images/placeholders/` | Stand-in images |
 | Testimonials | Not built | Section omitted until real quotes exist |
 
