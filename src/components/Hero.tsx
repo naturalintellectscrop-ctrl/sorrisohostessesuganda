@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
+import { ArrowDown } from "lucide-react";
 import { hero } from "@/data/content";
 
 export default function Hero() {
@@ -72,13 +73,13 @@ export default function Hero() {
           <div ref={ctaRef} className="flex flex-wrap items-center gap-5">
             <a
               href={hero.ctaHref}
-              className="inline-flex items-center rounded-full bg-gold px-8 py-4 text-sm font-body tracking-wide uppercase text-white hover:bg-gold-light transition-colors duration-300"
+              className="inline-flex items-center rounded-full bg-gold border border-gold px-8 py-4 text-sm font-body tracking-wide uppercase text-white hover:bg-transparent hover:text-gold transition-all duration-300 hover:-translate-y-1 hover:scale-[1.04]"
             >
               {hero.ctaLabel}
             </a>
             <a
               href={hero.secondaryHref}
-              className="inline-flex items-center rounded-full border border-white/30 px-8 py-4 text-sm font-body tracking-wide uppercase text-white hover:border-gold hover:text-gold-light transition-colors duration-300"
+              className="inline-flex items-center rounded-full border border-white/30 px-8 py-4 text-sm font-body tracking-wide uppercase text-white hover:border-gold hover:text-gold-light transition-all duration-300 hover:-translate-y-1 hover:scale-[1.04]"
             >
               {hero.secondaryLabel}
             </a>
@@ -86,10 +87,13 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 hidden sm:flex flex-col items-center gap-2 text-white/40">
-        <span className="text-[10px] tracking-[0.3em] uppercase">Scroll</span>
-        <span className="h-10 w-px bg-white/30" />
-      </div>
+      <a
+        href="#about"
+        aria-label="Scroll to next section"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 hidden sm:flex text-white/50 hover:text-gold-light transition-colors duration-300"
+      >
+        <ArrowDown size={26} strokeWidth={1.5} className="animate-bounce" />
+      </a>
     </section>
   );
 }

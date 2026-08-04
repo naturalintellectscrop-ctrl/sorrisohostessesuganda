@@ -37,15 +37,13 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 lg:px-10 py-16">
         <div className="grid sm:grid-cols-3 gap-10 items-start">
           <div className="flex items-center gap-3">
-            <span className="bg-ivory rounded-sm px-3 py-2 inline-flex">
-              <Image
-                src="/images/sorriso-logo.jpeg"
-                alt={siteInfo.name}
-                width={194}
-                height={36}
-                className="h-7 w-auto"
-              />
-            </span>
+            <Image
+              src="/images/sorriso-logo-light.png"
+              alt={siteInfo.name}
+              width={194}
+              height={36}
+              className="h-8 w-auto"
+            />
           </div>
 
           <ul className="flex flex-wrap gap-x-8 gap-y-3 sm:justify-center">

@@ -5,30 +5,40 @@ import { Mail, Phone, MessageCircle, Loader2, CheckCircle2 } from "lucide-react"
 import Reveal from "@/components/Reveal";
 import { contact, siteInfo } from "@/data/content";
 
-type Status = "idle" | "submitting" | "success" | "error";
+type Status = "idle" | "submitting" | "success" | "error" | "unconfigured";
 
-const WEB3FORMS_ACCESS_KEY =
-  process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ?? "YOUR_WEB3FORMS_ACCESS_KEY";
+// Set NEXT_PUBLIC_CONTACT_FORM_EMAIL once a destination inbox is ready.
+// Until then the form intentionally refuses to submit anywhere — see
+// the "unconfigured" branch below — so no inquiry is ever silently
+// routed to a placeholder address.
+const CONTACT_FORM_EMAIL = process.env.NEXT_PUBLIC_CONTACT_FORM_EMAIL;
 
 export default function Contact() {
   const [status, setStatus] = useState<Status>("idle");
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    if (!CONTACT_FORM_EMAIL) {
+      setStatus("unconfigured");
+      return;
+    }
+
     setStatus("submitting");
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-    formData.append("access_key", WEB3FORMS_ACCESS_KEY);
-    formData.append("subject", `New inquiry from ${siteInfo.name} website`);
+    formData.append("_subject", `New inquiry from ${siteInfo.name} website`);
+    formData.append("_template", "table");
+    formData.append("_captcha", "false");
 
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData,
-      });
+      const res = await fetch(
+        `https://formsubmit.co/ajax/${encodeURIComponent(CONTACT_FORM_EMAIL)}`,
+        { method: "POST", body: formData }
+      );
       const data = await res.json();
-      if (data.success) {
+      if (res.ok && data.success !== "false") {
         setStatus("success");
         form.reset();
       } else {
@@ -127,7 +137,7 @@ export default function Contact() {
             <button
               type="submit"
               disabled={status === "submitting"}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-8 py-4 text-sm font-body tracking-wide uppercase text-white hover:bg-gold-light transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed w-full sm:w-auto"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-gold border border-gold px-8 py-4 text-sm font-body tracking-wide uppercase text-white hover:bg-transparent hover:text-gold transition-all duration-300 hover:-translate-y-1 hover:scale-[1.04] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:scale-100 w-full sm:w-auto"
             >
               {status === "submitting" && (
                 <Loader2 size={16} className="animate-spin" />
@@ -143,6 +153,12 @@ export default function Contact() {
             {status === "error" && (
               <p className="text-sm text-red-400">
                 Something went wrong. Please try again or reach us directly.
+              </p>
+            )}
+            {status === "unconfigured" && (
+              <p className="text-sm text-white/50">
+                This form isn&apos;t connected yet — please reach out via
+                WhatsApp, phone, or email above in the meantime.
               </p>
             )}
           </form>

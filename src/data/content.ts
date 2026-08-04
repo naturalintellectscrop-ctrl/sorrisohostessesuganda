@@ -3,6 +3,8 @@ export type NavLink = {
   href: string;
 };
 
+// Full section list — used by the footer sitemap and anywhere a
+// complete list of in-page sections is needed.
 export const navLinks: NavLink[] = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },

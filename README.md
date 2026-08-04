@@ -8,7 +8,7 @@ Premium marketing site for Sorrisó Hostesses Uganda — a one-page site built w
 - **Styling:** Tailwind CSS v4
 - **Animation:** GSAP + IntersectionObserver-driven scroll reveals
 - **Icons:** lucide-react (brand/social icons are inline SVGs — lucide dropped brand logos)
-- **Forms:** Web3Forms (client-side POST, no backend)
+- **Forms:** FormSubmit (client-side POST, no backend)
 - **Deployment:** Vercel
 
 ## Getting started
@@ -28,14 +28,16 @@ Placeholder photography currently lives in `public/images/placeholders/`; swap t
 
 ## Contact form
 
-The contact form posts to [Web3Forms](https://web3forms.com). Set your access key via an environment variable:
+The contact form posts to [FormSubmit](https://formsubmit.co) — no account signup required, just a destination email. Until that email is set, the form intentionally refuses to submit anywhere (visitors see a message pointing them to WhatsApp/phone/email instead), so no inquiry is ever silently sent to a placeholder address.
+
+To connect it, set the destination inbox as an environment variable:
 
 ```bash
 # .env.local
-NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY=your-access-key-here
+NEXT_PUBLIC_CONTACT_FORM_EMAIL=your-real-email@example.com
 ```
 
-Without a real key, submissions will fail gracefully with an error message.
+**First submission only:** FormSubmit sends a one-time confirmation link to that inbox the first time it receives a submission — whoever owns that inbox needs to click it once to activate delivery. After that, submissions arrive automatically.
 
 ## Build
 

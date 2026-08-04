@@ -5,6 +5,8 @@ import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { navLinks, siteInfo } from "@/data/content";
 
+const menuLinks = navLinks.filter((link) => link.href !== "#contact");
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -25,7 +27,7 @@ export default function Navbar() {
       <nav className="mx-auto max-w-7xl px-6 lg:px-10 h-20 flex items-center justify-between">
         <a href="#home" className="flex items-center gap-2 shrink-0">
           <Image
-            src="/images/sorriso-logo.jpeg"
+            src="/images/sorriso-logo.png"
             alt={siteInfo.name}
             width={216}
             height={40}
@@ -35,7 +37,7 @@ export default function Navbar() {
         </a>
 
         <ul className="hidden md:flex items-center gap-10">
-          {navLinks.map((link) => (
+          {menuLinks.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
@@ -49,7 +51,7 @@ export default function Navbar() {
 
         <a
           href="#contact"
-          className="hidden md:inline-flex items-center rounded-full border border-gold px-6 py-2.5 text-sm font-body tracking-wide uppercase text-ink hover:bg-gold hover:text-white transition-colors duration-300"
+          className="hidden md:inline-flex items-center rounded-full bg-gold px-6 py-2.5 text-sm font-body tracking-wide uppercase text-white border border-gold hover:bg-transparent hover:text-gold transition-all duration-300 hover:-translate-y-0.5"
         >
           Contact Us
         </a>
@@ -65,9 +67,9 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <div className="md:hidden bg-cream border-t border-ink/10">
+        <div className="md:hidden bg-cream/80 backdrop-blur-xl border-t border-white/40 shadow-lg">
           <ul className="flex flex-col px-6 py-6 gap-5">
-            {navLinks.map((link) => (
+            {menuLinks.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
@@ -79,6 +81,15 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
+          <div className="px-6 pb-8">
+            <a
+              href="#contact"
+              onClick={() => setOpen(false)}
+              className="inline-flex items-center justify-center w-full rounded-full bg-gold px-6 py-3.5 text-sm font-body tracking-wide uppercase text-white border border-gold hover:bg-transparent hover:text-gold transition-all duration-300"
+            >
+              Contact Us
+            </a>
+          </div>
         </div>
       )}
     </header>
