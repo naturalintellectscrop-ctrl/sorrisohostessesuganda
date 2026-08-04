@@ -25,11 +25,13 @@ function FacebookIcon() {
   );
 }
 
+// Only profiles with a real URL in siteInfo are shown, so the footer
+// never links out to a dead or placeholder page.
 const socials = [
   { Icon: InstagramIcon, href: siteInfo.instagram, label: "Instagram" },
   { Icon: LinkedinIcon, href: siteInfo.linkedin, label: "LinkedIn" },
   { Icon: FacebookIcon, href: siteInfo.facebook, label: "Facebook" },
-];
+].filter((social) => social.href);
 
 export default function Footer() {
   return (
@@ -59,7 +61,7 @@ export default function Footer() {
             ))}
           </ul>
 
-          <div className="flex gap-3 sm:justify-end">
+          <div className="flex gap-3 sm:justify-end empty:hidden">
             {socials.map(({ Icon, href, label }) => (
               <a
                 key={label}

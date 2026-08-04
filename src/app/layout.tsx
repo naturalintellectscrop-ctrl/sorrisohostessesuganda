@@ -18,7 +18,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Sorrisó Hostesses Uganda | Premier Guest Support Services",
   description:
-    "Sorrisó Hostesses Uganda delivers premium event staffing, protocol teams, and guest support services for weddings, conferences, and prestigious occasions across Uganda.",
+    "Hostesses, protocol teams, and guest support staff for weddings, conferences, and corporate events in Uganda.",
   icons: {
     icon: "/favicon.ico",
   },

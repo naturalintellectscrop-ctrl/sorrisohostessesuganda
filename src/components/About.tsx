@@ -26,21 +26,9 @@ export default function About() {
           <h2 className="font-display text-4xl sm:text-5xl leading-[1.1] text-ink mb-6">
             {about.heading}
           </h2>
-          <p className="font-body text-ink/70 leading-relaxed max-w-xl mb-10">
+          <p className="font-body text-ink/70 leading-relaxed max-w-xl">
             {about.body}
           </p>
-          <div className="grid grid-cols-3 gap-6 max-w-md">
-            {about.stats.map((stat) => (
-              <div key={stat.label}>
-                <div className="font-display text-3xl text-gold mb-1">
-                  {stat.value}
-                </div>
-                <div className="font-body text-xs text-ink/60 leading-snug">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
         </Reveal>
       </div>
     </section>

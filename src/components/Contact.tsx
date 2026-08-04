@@ -8,9 +8,9 @@ import { contact, siteInfo } from "@/data/content";
 type Status = "idle" | "submitting" | "success" | "error" | "unconfigured";
 
 // Set NEXT_PUBLIC_CONTACT_FORM_EMAIL once a destination inbox is ready.
-// Until then the form intentionally refuses to submit anywhere — see
-// the "unconfigured" branch below — so no inquiry is ever silently
-// routed to a placeholder address.
+// Until then the form intentionally refuses to submit anywhere (see the
+// "unconfigured" branch below), so no inquiry is ever silently routed to
+// a placeholder address.
 const CONTACT_FORM_EMAIL = process.env.NEXT_PUBLIC_CONTACT_FORM_EMAIL;
 
 export default function Contact() {
@@ -63,42 +63,50 @@ export default function Contact() {
             {contact.body}
           </p>
 
+          {/* Each entry only renders once a real value exists in siteInfo,
+              so the page never shows a blank or placeholder contact. */}
           <ul className="space-y-5">
-            <li>
-              <a
-                href={`https://wa.me/${siteInfo.whatsapp}`}
-                target="_blank"
-                rel="noopener"
-                className="flex items-center gap-4 text-white/80 hover:text-gold-light transition-colors"
-              >
-                <span className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center shrink-0">
-                  <MessageCircle size={18} strokeWidth={1.5} />
-                </span>
-                <span className="font-body">{siteInfo.phone}</span>
-              </a>
-            </li>
-            <li>
-              <a
-                href={`tel:${siteInfo.phone.replace(/[^\d+]/g, "")}`}
-                className="flex items-center gap-4 text-white/80 hover:text-gold-light transition-colors"
-              >
-                <span className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center shrink-0">
-                  <Phone size={18} strokeWidth={1.5} />
-                </span>
-                <span className="font-body">{siteInfo.phone}</span>
-              </a>
-            </li>
-            <li>
-              <a
-                href={`mailto:${siteInfo.email}`}
-                className="flex items-center gap-4 text-white/80 hover:text-gold-light transition-colors"
-              >
-                <span className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center shrink-0">
-                  <Mail size={18} strokeWidth={1.5} />
-                </span>
-                <span className="font-body">{siteInfo.email}</span>
-              </a>
-            </li>
+            {siteInfo.whatsapp && (
+              <li>
+                <a
+                  href={`https://wa.me/${siteInfo.whatsapp}`}
+                  target="_blank"
+                  rel="noopener"
+                  className="flex items-center gap-4 text-white/80 hover:text-gold-light transition-colors"
+                >
+                  <span className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center shrink-0">
+                    <MessageCircle size={18} strokeWidth={1.5} />
+                  </span>
+                  <span className="font-body">{siteInfo.phone || siteInfo.whatsapp}</span>
+                </a>
+              </li>
+            )}
+            {siteInfo.phone && (
+              <li>
+                <a
+                  href={`tel:${siteInfo.phone.replace(/[^\d+]/g, "")}`}
+                  className="flex items-center gap-4 text-white/80 hover:text-gold-light transition-colors"
+                >
+                  <span className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center shrink-0">
+                    <Phone size={18} strokeWidth={1.5} />
+                  </span>
+                  <span className="font-body">{siteInfo.phone}</span>
+                </a>
+              </li>
+            )}
+            {siteInfo.email && (
+              <li>
+                <a
+                  href={`mailto:${siteInfo.email}`}
+                  className="flex items-center gap-4 text-white/80 hover:text-gold-light transition-colors"
+                >
+                  <span className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center shrink-0">
+                    <Mail size={18} strokeWidth={1.5} />
+                  </span>
+                  <span className="font-body">{siteInfo.email}</span>
+                </a>
+              </li>
+            )}
           </ul>
         </Reveal>
 
@@ -147,18 +155,17 @@ export default function Contact() {
 
             {status === "success" && (
               <p className="flex items-center gap-2 text-sm text-gold-light">
-                <CheckCircle2 size={16} /> Thank you — we&apos;ll be in touch shortly.
+                <CheckCircle2 size={16} /> Thank you. We will be in touch shortly.
               </p>
             )}
             {status === "error" && (
               <p className="text-sm text-red-400">
-                Something went wrong. Please try again or reach us directly.
+                Something went wrong. Please try again.
               </p>
             )}
             {status === "unconfigured" && (
               <p className="text-sm text-white/50">
-                This form isn&apos;t connected yet — please reach out via
-                WhatsApp, phone, or email above in the meantime.
+                This form is not connected yet. Please check back shortly.
               </p>
             )}
           </form>

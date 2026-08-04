@@ -7,9 +7,11 @@ export default function Gallery() {
     <section id="gallery" className="bg-cream py-28 lg:py-36">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal className="max-w-2xl mb-16 lg:mb-20">
-          <p className="font-body text-xs tracking-[0.25em] uppercase text-gold mb-5">
-            {gallery.eyebrow}
-          </p>
+          {gallery.eyebrow && (
+            <p className="font-body text-xs tracking-[0.25em] uppercase text-gold mb-5">
+              {gallery.eyebrow}
+            </p>
+          )}
           <h2 className="font-display text-4xl sm:text-5xl leading-[1.1] text-ink">
             {gallery.heading}
           </h2>
@@ -37,12 +39,6 @@ export default function Gallery() {
             </Reveal>
           ))}
         </div>
-
-        <Reveal delay={0.15} className="mt-10 text-center">
-          <p className="font-body text-sm text-ink/50 italic">
-            Placeholder imagery — real event photography coming soon.
-          </p>
-        </Reveal>
       </div>
     </section>
   );

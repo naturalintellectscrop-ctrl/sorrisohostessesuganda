@@ -13,7 +13,7 @@ export default function WhyChooseUs() {
             Why Choose Us
           </p>
           <h2 className="font-display text-4xl sm:text-5xl leading-[1.1] text-ink">
-            The Sorrisó Standard
+            How We Work
           </h2>
         </Reveal>
 

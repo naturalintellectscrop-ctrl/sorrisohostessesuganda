@@ -3,7 +3,7 @@ export type NavLink = {
   href: string;
 };
 
-// Full section list — used by the footer sitemap and anywhere a
+// Full section list, used by the footer sitemap and anywhere a
 // complete list of in-page sections is needed.
 export const navLinks: NavLink[] = [
   { label: "Home", href: "#home" },
@@ -14,23 +14,26 @@ export const navLinks: NavLink[] = [
   { label: "Contact", href: "#contact" },
 ];
 
+// Contact details and social profiles are intentionally blank until the
+// client supplies real ones. Components skip any entry left empty, so
+// nothing false or dead-ended is shown. Fill these in as they arrive.
 export const siteInfo = {
   name: "Sorrisó Hostesses Uganda",
   shortName: "Sorrisó",
   tagline: "Premier Guest Support Services",
-  phone: "+256-700782133",
-  whatsapp: "256700782133",
-  email: "info@sorrisouganda.com",
-  instagram: "https://www.instagram.com/",
-  linkedin: "https://www.linkedin.com/",
-  facebook: "https://www.facebook.com/",
+  phone: "",
+  whatsapp: "",
+  email: "",
+  instagram: "",
+  linkedin: "",
+  facebook: "",
 };
 
 export const hero = {
   eyebrow: "Sorrisó Hostesses Uganda",
   headline: "Premier Guest Support Services",
   subcopy:
-    "Tailored hospitality solutions for weddings, conferences, and prestigious occasions — delivered with elegance, discretion, and warmth.",
+    "Hostesses, protocol teams, and guest support staff for weddings, conferences, and corporate events in Uganda.",
   ctaLabel: "Contact Us",
   ctaHref: "#contact",
   secondaryLabel: "Our Services",
@@ -40,14 +43,9 @@ export const hero = {
 
 export const about = {
   eyebrow: "Who We Are",
-  heading: "Elegance in every detail, warmth in every welcome.",
-  body: "Sorrisó Hostesses Uganda elevates every celebration and corporate occasion with exceptional guest experiences. Our teams bring dedication, poise, and expertise to ensure each event receives top-tier support — creating lasting impressions that guests remember long after the evening ends.",
+  heading: "Hospitality staff who look after your guests.",
+  body: "Sorrisó Hostesses Uganda provides trained hostesses and event support staff for weddings, conferences, and corporate functions. We receive, direct, and attend to guests through the course of your event, so you can give your attention to the occasion itself.",
   image: "/images/placeholders/about.jpg",
-  stats: [
-    { label: "Events Supported", value: "150+" },
-    { label: "Trained Staff", value: "40+" },
-    { label: "Years Combined Experience", value: "10+" },
-  ],
 };
 
 export type Service = {
@@ -59,22 +57,22 @@ export const services: Service[] = [
   {
     title: "Protocol Teams",
     description:
-      "Refined protocol staff for award ceremonies, conferences, and prestigious state and corporate events.",
+      "Ushering and protocol staff for award ceremonies, conferences, and formal events.",
   },
   {
     title: "Wedding Guest Support",
     description:
-      "360° guest aides and waitstaff dedicated to seamless, unforgettable wedding celebrations.",
+      "Guest aides and waitstaff for weddings, from reception through to the end of the evening.",
   },
   {
     title: "Security Personnel",
     description:
-      "Discreet, professional bouncers and security staff trained in crowd management and guest safety.",
+      "Bouncers and security staff for crowd control and guest safety.",
   },
   {
     title: "Corporate Hospitality",
     description:
-      "Polished hosts and hostesses for product launches, galas, and executive functions.",
+      "Hosts and hostesses for product launches, galas, and company functions.",
   },
 ];
 
@@ -83,32 +81,36 @@ export type WhyPoint = {
   description: string;
 };
 
+// These describe how we work, not a track record we have not built yet.
 export const whyChooseUs: WhyPoint[] = [
   {
-    title: "Trained Excellence",
+    title: "Briefed Before Every Event",
     description:
-      "Every team member is trained in etiquette, discretion, and guest care to the highest standard.",
+      "Staff are taken through the running order, dress code, and guest list ahead of the day.",
   },
   {
-    title: "Tailored Solutions",
+    title: "Staffed to the Occasion",
     description:
-      "No two events are alike — we shape our staffing and service around your occasion's needs.",
+      "Team size and roles are set by the format of your event rather than a fixed package.",
   },
   {
-    title: "Trusted & Professional",
+    title: "One Point of Contact",
     description:
-      "A reputation built on reliability, discretion, and consistently outstanding service.",
+      "A single person handles your booking, briefing, and any changes before the day.",
   },
   {
-    title: "Seamless Coordination",
+    title: "Arrival to Departure",
     description:
-      "From reception to farewell, our teams manage the details so you can host with ease.",
+      "Cover from the moment guests arrive through to the close of the event.",
   },
 ];
 
+// No eyebrow or ownership claim here on purpose: the images below are
+// stand-ins, so the section stays a plain gallery until real Sorrisó
+// event photography replaces them.
 export const gallery = {
-  eyebrow: "A Glimpse of Our Work",
-  heading: "Moments We've Helped Create",
+  eyebrow: "",
+  heading: "Gallery",
   images: [
     { src: "/images/placeholders/hero.jpg", alt: "Guest support at a formal event" },
     { src: "/images/placeholders/about.jpg", alt: "Event coordination in progress" },
@@ -119,6 +121,6 @@ export const gallery = {
 
 export const contact = {
   eyebrow: "Get In Touch",
-  heading: "Let's Make Your Event Unforgettable",
-  body: "Reach out for inquiries and reservations — our team responds promptly to help you plan seamless guest experiences.",
+  heading: "Tell us about your event",
+  body: "Send through the date, venue, and the kind of support you need, and we will come back to you with staffing options and pricing.",
 };
