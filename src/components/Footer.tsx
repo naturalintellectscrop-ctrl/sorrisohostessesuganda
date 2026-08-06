@@ -25,10 +25,18 @@ function FacebookIcon() {
   );
 }
 
-// All three icons always show. Each becomes a real link once its URL is
-// filled into siteInfo; until then it renders as a plain, non-clickable
-// mark rather than linking out to a dead page.
+function TikTokIcon() {
+  // Simplified TikTok glyph (stylized musical note) matching the footer icon size.
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+      <path d="M16 3.5a4.5 4.5 0 0 1-4.5 4.5v6.5a3.5 3.5 0 1 1-3.5-3.5V8a6 6 0 1 0 8 5.66V3.5h0z" />
+    </svg>
+  );
+}
+
+// Social icons show always; each becomes a link when its URL is set in siteInfo.
 const socials = [
+  { Icon: TikTokIcon, href: siteInfo.tiktok, label: "TikTok" },
   { Icon: InstagramIcon, href: siteInfo.instagram, label: "Instagram" },
   { Icon: LinkedinIcon, href: siteInfo.linkedin, label: "LinkedIn" },
   { Icon: FacebookIcon, href: siteInfo.facebook, label: "Facebook" },

@@ -23,11 +23,15 @@ export const siteInfo = {
   shortName: "Sorrisó",
   tagline: "Premier Guest Support Services",
   phone: "",
+  // Primary WhatsApp/phone numbers. Use an array so multiple numbers can be displayed.
+  phones: ["0774870442", "0700440699", "0778985133"],
   whatsapp: "",
   email: "",
   instagram: "",
   linkedin: "",
   facebook: "",
+  // TikTok profile URL (filled when available)
+  tiktok: "https://www.tiktok.com/@sorrishostessesuganda?_r=1&_t=ZS-98dCqR0YLLD",
 };
 
 // Shown in place of a value while the corresponding siteInfo field is

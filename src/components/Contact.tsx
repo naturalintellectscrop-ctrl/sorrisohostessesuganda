@@ -7,26 +7,22 @@ import { contact, contactChannelLabels, siteInfo } from "@/data/content";
 
 type Status = "idle" | "submitting" | "success" | "error" | "unconfigured";
 
-const contactRows = [
-  {
-    key: "whatsapp" as const,
-    Icon: MessageCircle,
-    value: siteInfo.phone || siteInfo.whatsapp,
-    href: siteInfo.whatsapp ? `https://wa.me/${siteInfo.whatsapp}` : "",
-  },
-  {
-    key: "phone" as const,
-    Icon: Phone,
-    value: siteInfo.phone,
-    href: siteInfo.phone ? `tel:${siteInfo.phone.replace(/[^\d+]/g, "")}` : "",
-  },
-  {
-    key: "email" as const,
-    Icon: Mail,
-    value: siteInfo.email,
-    href: siteInfo.email ? `mailto:${siteInfo.email}` : "",
-  },
-];
+// Build a safe phones array from siteInfo. Prefer siteInfo.phones if present,
+// otherwise fall back to splitting a single phone string by commas.
+const phones: string[] = (siteInfo as any).phones && Array.isArray((siteInfo as any).phones)
+  ? (siteInfo as any).phones
+  : siteInfo.phone
+  ? String(siteInfo.phone).split(/\s*,\s*/).filter(Boolean)
+  : [];
+
+const whatsappHref = siteInfo.whatsapp
+  ? `https://wa.me/${siteInfo.whatsapp.replace(/[^\d+]/g, "")}`
+  : phones.length
+  ? `https://wa.me/${phones[0].replace(/[^\d+]/g, "")}`
+  : "";
+
+const emailHref = siteInfo.email ? `mailto:${siteInfo.email}` : "";
+
 
 // Set NEXT_PUBLIC_CONTACT_FORM_EMAIL once a destination inbox is ready.
 // Until then the form intentionally refuses to submit anywhere (see the
@@ -88,38 +84,85 @@ export default function Contact() {
               link once its siteInfo value is filled in; until then it
               names the channel rather than inventing a number or address. */}
           <ul className="space-y-5">
-            {contactRows.map(({ key, Icon, value, href }) => {
-              const inner = (
-                <>
+            {/* WhatsApp / primary contact row */}
+            <li>
+              {whatsappHref ? (
+                <a
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noopener"
+                  className="flex items-center gap-4 text-white/80 hover:text-gold-light transition-colors"
+                >
                   <span className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center shrink-0">
-                    <Icon size={18} strokeWidth={1.5} />
+                    <MessageCircle size={18} strokeWidth={1.5} />
                   </span>
-                  <span className="font-body">
-                    {value || contactChannelLabels[key]}
+                  <span className="font-body">{phones.length ? phones.join(', ') : siteInfo.whatsapp || contactChannelLabels.whatsapp}</span>
+                </a>
+              ) : (
+                <div className="flex items-center gap-4 text-white/40">
+                  <span className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center shrink-0">
+                    <MessageCircle size={18} strokeWidth={1.5} />
                   </span>
-                </>
-              );
+                  <span className="font-body">{phones.length ? phones.join(', ') : contactChannelLabels.whatsapp}</span>
+                </div>
+              )}
+            </li>
 
-              return (
-                <li key={key}>
-                  {href ? (
+            {/* Phone numbers: render each number as its own clickable row when available */}
+            <li>
+              {phones.length ? (
+                <div className="flex flex-col gap-3">
+                  {phones.map((p) => (
                     <a
-                      href={href}
-                      {...(key === "whatsapp"
-                        ? { target: "_blank", rel: "noopener" }
-                        : {})}
+                      key={p}
+                      href={`tel:${p.replace(/[^\d+]/g, "")}`}
                       className="flex items-center gap-4 text-white/80 hover:text-gold-light transition-colors"
                     >
-                      {inner}
+                      <span className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center shrink-0">
+                        <Phone size={18} strokeWidth={1.5} />
+                      </span>
+                      <span className="font-body">{p}</span>
                     </a>
-                  ) : (
-                    <div className="flex items-center gap-4 text-white/40">
-                      {inner}
-                    </div>
-                  )}
-                </li>
-              );
-            })}
+                  ))}
+                </div>
+              ) : siteInfo.phone || siteInfo.whatsapp ? (
+                <div className="flex items-center gap-4 text-white/80">
+                  <span className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center shrink-0">
+                    <Phone size={18} strokeWidth={1.5} />
+                  </span>
+                  <span className="font-body">{siteInfo.phone || contactChannelLabels.phone}</span>
+                </div>
+              ) : (
+                <div className="flex items-center gap-4 text-white/40">
+                  <span className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center shrink-0">
+                    <Phone size={18} strokeWidth={1.5} />
+                  </span>
+                  <span className="font-body">{contactChannelLabels.phone}</span>
+                </div>
+              )}
+            </li>
+
+            {/* Email row */}
+            <li>
+              {emailHref ? (
+                <a
+                  href={emailHref}
+                  className="flex items-center gap-4 text-white/80 hover:text-gold-light transition-colors"
+                >
+                  <span className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center shrink-0">
+                    <Mail size={18} strokeWidth={1.5} />
+                  </span>
+                  <span className="font-body">{siteInfo.email}</span>
+                </a>
+              ) : (
+                <div className="flex items-center gap-4 text-white/40">
+                  <span className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center shrink-0">
+                    <Mail size={18} strokeWidth={1.5} />
+                  </span>
+                  <span className="font-body">{contactChannelLabels.email}</span>
+                </div>
+              )}
+            </li>
           </ul>
         </Reveal>
 
