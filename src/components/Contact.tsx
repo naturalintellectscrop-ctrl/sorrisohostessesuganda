@@ -160,6 +160,14 @@ export default function Contact() {
               placeholder="Event Type (Wedding, Conference, etc.)"
               className="w-full bg-transparent border border-white/20 rounded-sm px-5 py-4 font-body text-white placeholder:text-white/40 focus:outline-none focus:border-gold transition-colors"
             />
+            <textarea
+              name="message"
+              placeholder="Tell us about your event"
+              required
+              rows={5}
+              className="w-full bg-transparent border border-white/20 rounded-sm px-5 py-4 font-body text-white placeholder:text-white/40 focus:outline-none focus:border-gold transition-colors resize-none"
+            />
+
             <button
               type="submit"
               disabled={status === "submitting"}
