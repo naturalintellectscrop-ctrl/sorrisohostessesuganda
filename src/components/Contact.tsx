@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { Mail, Phone, MessageCircle, Loader2, CheckCircle2 } from "lucide-react";
+import { Mail, Phone, Loader2, CheckCircle2 } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import { contact, contactChannelLabels, siteInfo } from "@/data/content";
 
@@ -14,12 +14,6 @@ const phones: string[] = (siteInfo as any).phones && Array.isArray((siteInfo as 
   : siteInfo.phone
   ? String(siteInfo.phone).split(/\s*,\s*/).filter(Boolean)
   : [];
-
-const whatsappHref = siteInfo.whatsapp
-  ? `https://wa.me/${siteInfo.whatsapp.replace(/[^\d+]/g, "")}`
-  : phones.length
-  ? `https://wa.me/${phones[0].replace(/[^\d+]/g, "")}`
-  : "";
 
 const emailHref = siteInfo.email ? `mailto:${siteInfo.email}` : "";
 
@@ -84,31 +78,7 @@ export default function Contact() {
               link once its siteInfo value is filled in; until then it
               names the channel rather than inventing a number or address. */}
           <ul className="space-y-5">
-            {/* WhatsApp / primary contact row */}
-            <li>
-              {whatsappHref ? (
-                <a
-                  href={whatsappHref}
-                  target="_blank"
-                  rel="noopener"
-                  className="flex items-center gap-4 text-white/80 hover:text-gold-light transition-colors"
-                >
-                  <span className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center shrink-0">
-                    <MessageCircle size={18} strokeWidth={1.5} />
-                  </span>
-                  <span className="font-body">{phones.length ? phones.join(', ') : siteInfo.whatsapp || contactChannelLabels.whatsapp}</span>
-                </a>
-              ) : (
-                <div className="flex items-center gap-4 text-white/40">
-                  <span className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center shrink-0">
-                    <MessageCircle size={18} strokeWidth={1.5} />
-                  </span>
-                  <span className="font-body">{phones.length ? phones.join(', ') : contactChannelLabels.whatsapp}</span>
-                </div>
-              )}
-            </li>
-
-            {/* Phone numbers: render each number as its own clickable row when available */}
+{/* Phone numbers: render each number as its own clickable row when available */}
             <li>
               {phones.length ? (
                 <div className="flex flex-col gap-3">
@@ -190,14 +160,6 @@ export default function Contact() {
               placeholder="Event Type (Wedding, Conference, etc.)"
               className="w-full bg-transparent border border-white/20 rounded-sm px-5 py-4 font-body text-white placeholder:text-white/40 focus:outline-none focus:border-gold transition-colors"
             />
-            <textarea
-              name="message"
-              placeholder="Tell us about your event"
-              required
-              rows={5}
-              className="w-full bg-transparent border border-white/20 rounded-sm px-5 py-4 font-body text-white placeholder:text-white/40 focus:outline-none focus:border-gold transition-colors resize-none"
-            />
-
             <button
               type="submit"
               disabled={status === "submitting"}
