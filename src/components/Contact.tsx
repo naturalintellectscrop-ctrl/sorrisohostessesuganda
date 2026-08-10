@@ -97,7 +97,7 @@ export default function Contact() {
 
             <li>
               {siteInfo.phones.length ? (
-                <div className="flex items-start gap-4">
+                <div className="flex items-start gap-4 text-white/80">
                   <span className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center shrink-0">
                     <Phone size={18} strokeWidth={1.5} />
                   </span>
