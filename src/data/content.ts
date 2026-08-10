@@ -62,22 +62,26 @@ export type Service = {
   description: string;
 };
 
-// Sourced directly from the client's own description of how the
-// company is organized, not invented service categories.
 export const services: Service[] = [
   {
-    title: "Guest Support Team",
+    title: "Protocol Teams",
     description:
-      "Focused on welcoming guests, assisting them, and making sure they feel cared for throughout the event.",
+      "Ushering and protocol staff for award ceremonies, conferences, and formal events.",
   },
   {
-    title: "Waiters Team",
-    description: "Focused on providing smooth and attentive beverage service.",
+    title: "Wedding Guest Support",
+    description:
+      "Guest aides and waitstaff for weddings, from reception through to the end of the evening.",
   },
   {
-    title: "Security & Cleaning Teams",
+    title: "Security Personnel",
     description:
-      "Available when needed to help keep your event safe, clean, and running smoothly.",
+      "Bouncers and security staff for crowd control and guest safety.",
+  },
+  {
+    title: "Corporate Hospitality",
+    description:
+      "Hosts and hostesses for product launches, galas, and company functions.",
   },
 ];
 

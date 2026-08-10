@@ -1,8 +1,8 @@
-import { HeartHandshake, Wine, ShieldCheck } from "lucide-react";
+import { ShieldCheck, HeartHandshake, ShieldAlert, Briefcase } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import { services } from "@/data/content";
 
-const icons = [HeartHandshake, Wine, ShieldCheck];
+const icons = [ShieldCheck, HeartHandshake, ShieldAlert, Briefcase];
 
 export default function Services() {
   return (
@@ -17,9 +17,7 @@ export default function Services() {
           </h2>
         </Reveal>
 
-        {/* Grid assumes 3 services (see src/data/content.ts); update the
-            column count if that list grows. */}
-        <div className="grid sm:grid-cols-3 gap-px bg-white/10">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10">
           {services.map((service, i) => {
             const Icon = icons[i % icons.length];
             return (
