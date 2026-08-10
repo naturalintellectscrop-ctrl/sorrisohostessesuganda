@@ -23,7 +23,7 @@ export const siteInfo = {
   shortName: "Sorrisó",
   tagline: "Premier Guest Support Services",
   phones: ["0774870442", "0700440699", "0778985133"],
-  whatsapp: "",
+  whatsapp: "https://wa.me/256700440699",
   email: "",
   instagram: "",
   linkedin: "",

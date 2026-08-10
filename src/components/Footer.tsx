@@ -17,14 +17,6 @@ function LinkedinIcon() {
   );
 }
 
-function FacebookIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
-      <path d="M13.5 21v-7.6h2.55l.38-2.96h-2.93V8.53c0-.86.24-1.44 1.47-1.44h1.57V4.46A21 21 0 0 0 14.3 4.3c-2.24 0-3.78 1.37-3.78 3.88v2.16H7.96v2.96h2.56V21h2.98Z" />
-    </svg>
-  );
-}
-
 function TikTokIcon() {
   // Simplified TikTok glyph (stylized musical note) matching the footer icon size.
   return (
@@ -52,7 +44,6 @@ const socials = [
   { Icon: TikTokIcon, href: siteInfo.tiktok, label: "TikTok" },
   { Icon: InstagramIcon, href: siteInfo.instagram, label: "Instagram" },
   { Icon: LinkedinIcon, href: siteInfo.linkedin, label: "LinkedIn" },
-  { Icon: FacebookIcon, href: siteInfo.facebook, label: "Facebook" },
 ];
 
 export default function Footer() {
