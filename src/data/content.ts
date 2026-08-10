@@ -27,7 +27,6 @@ export const siteInfo = {
   email: "",
   instagram: "",
   linkedin: "",
-  facebook: "",
   tiktok: "https://www.tiktok.com/@sorrishostessesuganda",
 };
 
