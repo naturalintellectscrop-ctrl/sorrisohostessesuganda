@@ -35,34 +35,20 @@ function TikTokIcon() {
 }
 
 function WhatsAppIcon() {
-  // Simple phone-in-bubble icon suitable as a WhatsApp affordance.
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
-      <circle cx="12" cy="12" r="10" />
-      <path d="M15.05 14.85c-.25-.12-1.48-.73-1.71-.82-.23-.09-.4-.12-.57.12-.17.25-.66.82-.81.99-.15.17-.3.19-.55.07-.25-.12-1.05-.39-2-1.24-.74-.7-1.24-1.57-1.39-1.83-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.12-.15.16-.25.25-.4.09-.15.05-.29-.02-.41-.07-.12-.57-1.38-.78-1.89-.2-.5-.41-.43-.57-.44l-.49-.01c-.16 0-.41.06-.62.29-.21.23-.79.78-.79 1.9 0 1.12.86 2.75.98 2.95.12.2 1.65 2.52 3.99 3.44 0 .0 0 .0 0 .0.07.03.44.18.45.19.05.02.39.12.74.12.35 0 1.19-.15 1.38-.27.19-.12 1.06-.56 1.21-1.11.15-.55.15-.95.11-1.05-.05-.1-.18-.15-.43-.27z" fill="#fff" />
+      <path d="M17.6 6.32A8.86 8.86 0 0 0 12.05 4a8.94 8.94 0 0 0-7.75 13.4L3 21l3.7-1.28a8.9 8.9 0 0 0 4.34 1.13H12a8.94 8.94 0 0 0 8.94-8.87 8.86 8.86 0 0 0-3.34-6.66Zm-5.55 13.7a7.4 7.4 0 0 1-3.78-1.04l-.27-.16-2.24.78.75-2.2-.18-.28a7.44 7.44 0 1 1 13.8-3.9 7.46 7.46 0 0 1-7.4 6.8Zm4.08-5.56c-.22-.11-1.32-.65-1.53-.73-.2-.08-.35-.11-.5.11-.15.22-.58.73-.71.88-.13.15-.26.16-.48.05a6.05 6.05 0 0 1-1.78-1.1 6.68 6.68 0 0 1-1.23-1.53c-.13-.22 0-.34.1-.45.1-.1.22-.26.33-.39.11-.13.15-.22.22-.37.08-.15.04-.28-.02-.4-.06-.11-.5-1.2-.68-1.65-.18-.43-.36-.37-.5-.38h-.43a.83.83 0 0 0-.6.28 2.53 2.53 0 0 0-.79 1.88c0 1.1.8 2.17.91 2.32.11.15 1.57 2.4 3.81 3.36.53.23.95.37 1.27.47.53.17 1.02.15 1.4.09.43-.06 1.32-.54 1.5-1.06.19-.52.19-.96.13-1.06-.06-.1-.2-.15-.42-.26Z" />
     </svg>
   );
 }
 
-// Resolve a WhatsApp href: accept either a full URL provided in siteInfo.whatsapp
-// or a phone number string and convert it to a wa.me link.
-const computedWhatsAppHref = (() => {
-  const w = siteInfo.whatsapp;
-  if (!w) return null;
-  try {
-    if (/^https?:\/\//i.test(w)) return w;
-    // Treat as number: strip non-digits and prefix with wa.me
-    const digits = String(w).replace(/[^\d+]/g, "");
-    if (!digits) return null;
-    return `https://wa.me/${digits}`;
-  } catch {
-    return null;
-  }
-})();
+const whatsappHref = siteInfo.whatsapp
+  ? `https://wa.me/${siteInfo.whatsapp.replace(/[^\d+]/g, "")}`
+  : "";
 
 // Social icons show always; each becomes a link when its URL is set in siteInfo.
 const socials = [
-  { Icon: WhatsAppIcon, href: computedWhatsAppHref, label: "WhatsApp" },
+  { Icon: WhatsAppIcon, href: whatsappHref, label: "WhatsApp" },
   { Icon: TikTokIcon, href: siteInfo.tiktok, label: "TikTok" },
   { Icon: InstagramIcon, href: siteInfo.instagram, label: "Instagram" },
   { Icon: LinkedinIcon, href: siteInfo.linkedin, label: "LinkedIn" },

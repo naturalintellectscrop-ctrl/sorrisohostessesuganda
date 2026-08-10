@@ -1,22 +1,16 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { Mail, Phone, Loader2, CheckCircle2 } from "lucide-react";
+import { Mail, Phone, MessageCircle, Loader2, CheckCircle2 } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import { contact, contactChannelLabels, siteInfo } from "@/data/content";
 
 type Status = "idle" | "submitting" | "success" | "error" | "unconfigured";
 
-// Build a safe phones array from siteInfo. Prefer siteInfo.phones if present,
-// otherwise fall back to splitting a single phone string by commas.
-const phones: string[] = (siteInfo as any).phones && Array.isArray((siteInfo as any).phones)
-  ? (siteInfo as any).phones
-  : siteInfo.phone
-  ? String(siteInfo.phone).split(/\s*,\s*/).filter(Boolean)
-  : [];
-
+const whatsappHref = siteInfo.whatsapp
+  ? `https://wa.me/${siteInfo.whatsapp.replace(/[^\d+]/g, "")}`
+  : "";
 const emailHref = siteInfo.email ? `mailto:${siteInfo.email}` : "";
-
 
 // Set NEXT_PUBLIC_CONTACT_FORM_EMAIL once a destination inbox is ready.
 // Until then the form intentionally refuses to submit anywhere (see the
@@ -78,11 +72,33 @@ export default function Contact() {
               link once its siteInfo value is filled in; until then it
               names the channel rather than inventing a number or address. */}
           <ul className="space-y-5">
-{/* Phone numbers: render each number as its own clickable row when available */}
             <li>
-              {phones.length ? (
+              {whatsappHref ? (
+                <a
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noopener"
+                  className="flex items-center gap-4 text-white/80 hover:text-gold-light transition-colors"
+                >
+                  <span className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center shrink-0">
+                    <MessageCircle size={18} strokeWidth={1.5} />
+                  </span>
+                  <span className="font-body">{contactChannelLabels.whatsapp}</span>
+                </a>
+              ) : (
+                <div className="flex items-center gap-4 text-white/40">
+                  <span className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center shrink-0">
+                    <MessageCircle size={18} strokeWidth={1.5} />
+                  </span>
+                  <span className="font-body">{contactChannelLabels.whatsapp}</span>
+                </div>
+              )}
+            </li>
+
+            <li>
+              {siteInfo.phones.length ? (
                 <div className="flex flex-col gap-3">
-                  {phones.map((p) => (
+                  {siteInfo.phones.map((p) => (
                     <a
                       key={p}
                       href={`tel:${p.replace(/[^\d+]/g, "")}`}
@@ -95,13 +111,6 @@ export default function Contact() {
                     </a>
                   ))}
                 </div>
-              ) : siteInfo.phone || siteInfo.whatsapp ? (
-                <div className="flex items-center gap-4 text-white/80">
-                  <span className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center shrink-0">
-                    <Phone size={18} strokeWidth={1.5} />
-                  </span>
-                  <span className="font-body">{siteInfo.phone || contactChannelLabels.phone}</span>
-                </div>
               ) : (
                 <div className="flex items-center gap-4 text-white/40">
                   <span className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center shrink-0">
@@ -112,7 +121,6 @@ export default function Contact() {
               )}
             </li>
 
-            {/* Email row */}
             <li>
               {emailHref ? (
                 <a

@@ -19,14 +19,10 @@ export const metadata: Metadata = {
   title: "Sorrisó Hostesses Uganda | Premier Guest Support Services",
   description:
     "Hostesses, protocol teams, and guest support staff for weddings, conferences, and corporate events in Uganda.",
+  // The favicon itself is served via the src/app/favicon.ico file
+  // convention (auto-detected by Next.js), so only the Apple touch icon
+  // needs an explicit entry here.
   icons: {
-    // Use the uploaded PNG favicon located in public/images. Providing
-    // structured entries ensures proper sizes and types for browsers.
-    icon: [
-      { url: "/images/favicon-256.png", sizes: "256x256", type: "image/png" },
-      { url: "/images/favicon-256.png", sizes: "any", type: "image/png" },
-    ],
-    shortcut: "/images/favicon-256.png",
     apple: "/images/favicon-256.png",
   },
 };

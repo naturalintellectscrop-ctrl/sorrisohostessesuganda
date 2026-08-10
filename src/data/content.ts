@@ -14,24 +14,21 @@ export const navLinks: NavLink[] = [
   { label: "Contact", href: "#contact" },
 ];
 
-// Contact details and social profiles are still blank pending the real
-// values. The rows and icons stay visible either way; each one only
+// Contact details and social profiles. Anything still blank is pending
+// the real value. Rows and icons stay visible either way; each one only
 // becomes a working link once its value is filled in here, so the
 // layout is final but nothing points somewhere false in the meantime.
 export const siteInfo = {
   name: "Sorrisó Hostesses Uganda",
   shortName: "Sorrisó",
   tagline: "Premier Guest Support Services",
-  phone: "",
-  // Primary WhatsApp/phone numbers. Use an array so multiple numbers can be displayed.
   phones: ["0774870442", "0700440699", "0778985133"],
   whatsapp: "",
   email: "",
   instagram: "",
   linkedin: "",
   facebook: "",
-  // TikTok profile URL (filled when available)
-  tiktok: "https://www.tiktok.com/@sorrishostessesuganda?_r=1&_t=ZS-98dCqR0YLLD",
+  tiktok: "https://www.tiktok.com/@sorrishostessesuganda",
 };
 
 // Shown in place of a value while the corresponding siteInfo field is
@@ -46,19 +43,19 @@ export const hero = {
   eyebrow: "Sorrisó Hostesses Uganda",
   headline: "Premier Guest Support Services",
   subcopy:
-    "Hostesses, protocol teams, and guest support staff for weddings, conferences, and corporate events in Uganda.",
+    "Dedicated guest support, waiter, and security teams for weddings, conferences, and corporate events in Uganda.",
   ctaLabel: "Contact Us",
   ctaHref: "#contact",
   secondaryLabel: "Our Services",
   secondaryHref: "#services",
-  image: "/images/placeholders/hero.jpg",
+  image: "/images/gallery/serving-1.jpeg",
 };
 
 export const about = {
   eyebrow: "Who We Are",
-  heading: "Hospitality staff who look after your guests.",
-  body: "Sorrisó Hostesses Uganda provides trained hostesses and event support staff for weddings, conferences, and corporate functions. We receive, direct, and attend to guests through the course of your event, so you can give your attention to the occasion itself.",
-  image: "/images/placeholders/about.jpg",
+  heading: "Your celebration deserves more than a team just showing up.",
+  body: "We want you and your guests to feel welcomed, comfortable, and well taken care of. Depending on your event needs, we provide dedicated teams for different responsibilities, so each team can focus on their role and your guests receive better service.",
+  image: "/images/gallery/serving-2.jpeg",
 };
 
 export type Service = {
@@ -66,26 +63,22 @@ export type Service = {
   description: string;
 };
 
+// Sourced directly from the client's own description of how the
+// company is organized, not invented service categories.
 export const services: Service[] = [
   {
-    title: "Protocol Teams",
+    title: "Guest Support Team",
     description:
-      "Ushering and protocol staff for award ceremonies, conferences, and formal events.",
+      "Focused on welcoming guests, assisting them, and making sure they feel cared for throughout the event.",
   },
   {
-    title: "Wedding Guest Support",
-    description:
-      "Guest aides and waitstaff for weddings, from reception through to the end of the evening.",
+    title: "Waiters Team",
+    description: "Focused on providing smooth and attentive beverage service.",
   },
   {
-    title: "Security Personnel",
+    title: "Security & Cleaning Teams",
     description:
-      "Bouncers and security staff for crowd control and guest safety.",
-  },
-  {
-    title: "Corporate Hospitality",
-    description:
-      "Hosts and hostesses for product launches, galas, and company functions.",
+      "Available when needed to help keep your event safe, clean, and running smoothly.",
   },
 ];
 
@@ -97,9 +90,9 @@ export type WhyPoint = {
 // These describe how we work, not a track record we have not built yet.
 export const whyChooseUs: WhyPoint[] = [
   {
-    title: "Briefed Before Every Event",
+    title: "Dedicated Teams",
     description:
-      "Staff are taken through the running order, dress code, and guest list ahead of the day.",
+      "Guest support, waiters, and security are separate teams, each focused on their own role.",
   },
   {
     title: "Staffed to the Occasion",
@@ -118,17 +111,16 @@ export const whyChooseUs: WhyPoint[] = [
   },
 ];
 
-// No eyebrow or ownership claim here on purpose: the images below are
-// stand-ins, so the section stays a plain gallery until real Sorrisó
-// event photography replaces them.
+// No eyebrow or ownership claim here on purpose: this is a working
+// selection of real event photos, not a curated portfolio claim.
 export const gallery = {
   eyebrow: "",
   heading: "Gallery",
   images: [
-    { src: "/images/placeholders/hero.jpg", alt: "Guest support at a formal event" },
-    { src: "/images/placeholders/about.jpg", alt: "Event coordination in progress" },
-    { src: "/images/placeholders/gallery-1.jpg", alt: "Hostess team at an occasion" },
-    { src: "/images/placeholders/gallery-2.jpg", alt: "Hostess team in uniform" },
+    { src: "/images/gallery/serving-1.jpeg", alt: "Guest support staff serving at a wedding" },
+    { src: "/images/gallery/serving-2.jpeg", alt: "Staff assisting the bride at a wedding" },
+    { src: "/images/gallery/entrance-dance.jpeg", alt: "Wedding reception entrance" },
+    { src: "/images/gallery/venue-setup.jpeg", alt: "Event venue set up for a reception" },
   ],
 };
 
