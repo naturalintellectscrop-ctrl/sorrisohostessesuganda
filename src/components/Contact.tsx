@@ -97,19 +97,25 @@ export default function Contact() {
 
             <li>
               {siteInfo.phones.length ? (
-                <div className="flex flex-col gap-3">
-                  {siteInfo.phones.map((p) => (
-                    <a
-                      key={p}
-                      href={`tel:${p.replace(/[^\d+]/g, "")}`}
-                      className="flex items-center gap-4 text-white/80 hover:text-gold-light transition-colors"
-                    >
-                      <span className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center shrink-0">
-                        <Phone size={18} strokeWidth={1.5} />
+                <div className="flex items-start gap-4">
+                  <span className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center shrink-0">
+                    <Phone size={18} strokeWidth={1.5} />
+                  </span>
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 pt-2.5">
+                    {siteInfo.phones.map((p, i) => (
+                      <span key={p} className="flex items-center gap-3">
+                        <a
+                          href={`tel:${p.replace(/[^\d+]/g, "")}`}
+                          className="font-body text-white/80 hover:text-gold-light transition-colors"
+                        >
+                          {p}
+                        </a>
+                        {i < siteInfo.phones.length - 1 && (
+                          <span className="text-white/25">&middot;</span>
+                        )}
                       </span>
-                      <span className="font-body">{p}</span>
-                    </a>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               ) : (
                 <div className="flex items-center gap-4 text-white/40">

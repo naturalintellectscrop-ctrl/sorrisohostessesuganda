@@ -25,6 +25,13 @@ export const metadata: Metadata = {
   icons: {
     apple: "/images/favicon-256.png",
   },
+  // Without this, mobile Safari (and some Android browsers) auto-detect
+  // phone-number-looking text and wrap it in their own native link with
+  // a hardcoded blue style, overriding the page's own <a href="tel:">
+  // styling on the contact section's phone numbers.
+  formatDetection: {
+    telephone: false,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
