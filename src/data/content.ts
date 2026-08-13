@@ -121,7 +121,7 @@ export const gallery = {
   heading: "Gallery",
   images: [
     { src: "/images/gallery/serving-1.jpeg", alt: "Guest support staff serving at a wedding" },
-    { src: "/images/venue-setup-01.jpeg", alt: "Staff assisting the bride at a wedding" },
+    { src: "/images/gallery/venue-setup-02.jpeg", alt: "Staff assisting the bride at a wedding" },
     { src: "/images/gallery/entrance-dance.jpeg", alt: "Wedding reception entrance" },
     { src: "/images/gallery/venue-setup.jpeg", alt: "Event venue set up for a reception" },
   ],
