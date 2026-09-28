@@ -25,7 +25,7 @@ export const siteInfo = {
   phones: ["0774870442", "0700440699", "0778985133"],
   whatsapp: "https://wa.me/256700440699",
   email: "",
-  instagram: "",
+  instagram: "sorrisohostessesug9@gmail.com",
   linkedin: "",
   tiktok: "https://www.tiktok.com/@sorrishostessesuganda",
 };
