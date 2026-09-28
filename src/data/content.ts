@@ -24,8 +24,8 @@ export const siteInfo = {
   tagline: "Premier Guest Support Services",
   phones: ["0774870442", "0700440699", "0778985133"],
   whatsapp: "https://wa.me/256700440699",
-  email: "",
-  instagram: "sorrisohostessesug9@gmail.com",
+  email: "sorrisohostessesug9@gmail.com",
+  instagram: "",
   linkedin: "",
   tiktok: "https://www.tiktok.com/@sorrishostessesuganda",
 };
